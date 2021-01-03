@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
 
 function HomeScreen (props){
 
@@ -8,10 +8,10 @@ function HomeScreen (props){
   
    useEffect(() => {
         const fecthData = async () => {
-            const { data }= await axios.get("/api/products");
+            const { data } = await axios.get("/api/products");
             setProduct(data);
         }
-        fecthData();
+       fecthData();
         
         return ()=> {
             //
@@ -20,10 +20,10 @@ function HomeScreen (props){
 
     return  <ul className="products"> 
     {
-       products.map(product => 
-       <li>
-           <div className="product">
-           <Link to={'/product/'+ product._id}>
+        products.map(product => 
+       <li key={product._id}>
+            <div className="product">
+            <Link to={'/product/'+ product._id}>
                <img className="product-image" src={product.image} alt="product"/>
             </Link>
                <div className="product-name">
@@ -32,7 +32,7 @@ function HomeScreen (props){
                <div className="product-brand">{product.brand}</div>
                <div className="product-price">${product.price}</div>
                <div className="product-rating">{product.rating} stars ({product.numReviews})</div>
-           </div>
+            </div>
        </li>)
        
     }   
